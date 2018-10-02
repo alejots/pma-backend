@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
 from django.contrib.auth.models import User
-from stores.models import Version
-from stores.serializers import VersionSerializer # UserSerializer
+from stores.models import Product, Unit, Version, Category, Store, ProductInStore
+from stores.serializers import VersionSerializer, UnitSerializer, ProductSerializer, CategorySerializer, StoreSerializer# UserSerializer
 from stores.permissions import IsOwnerOrReadOnly
 
 
@@ -20,32 +20,6 @@ def api_root(request, format=None):
         'users': reverse('user-list', request=request, format=format),
         'recetas': reverse('receta-list', request=request, format=format)
     })
-
-
-class RecetaViewSet(viewsets.ModelViewSet):
-
-    queryset = Receta.objects.all()
-    serializer_class = RecetaSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
-
-class IngredienteViewSet(viewsets.ModelViewSet):
-    queryset = Ingrediente.objects.all()
-    serializer_class = IngredienteSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
-
-class ImplementoViewSet(viewsets.ModelViewSet):
-    queryset = Implemento.objects.all()
-    serializer_class = ImplementoSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
 '''
 class VersionViewSet(viewsets.ModelViewSet):
     queryset = Version.objects.all()
@@ -54,15 +28,27 @@ class VersionViewSet(viewsets.ModelViewSet):
     # Mostrar solo la última versión
     def get_queryset(self):
         result = (self.queryset.filter().order_by('-date')).values()
-
-        response = [
-            {
-                'version': result[0]['version'],
-                'fecha': result[0]['date']
-            },
-
-        ]
+        response = [{
+            'version': result[0]['version'],
+            'fecha': result[0]['date']
+        }]
         return response
+
+class UnitViewSet(viewsets.ModelViewSet):
+    queryset = Unit.objects.all()
+    serializer_class = UnitSerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class StoreViewSet(viewsets.ModelViewSet):
+    queryset = Store.objects.all()
+    serializer_class = StoreSerializer
 
 
 @api_view(['GET'])

@@ -6,7 +6,7 @@ from django.contrib import admin
 from django import forms
 from django.contrib import admin
 from django.core.files.images import get_image_dimensions
-from stores.models import Product, Unity, Version, Category, Store, ProductInStore
+from stores.models import Product, Unit, Version, Category, Store, ProductInStore
 
 
 class ProductForm(forms.ModelForm):
@@ -33,16 +33,16 @@ class ProductForm(forms.ModelForm):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'code', 'unity', 'quantity', 'category', 'active')
+    list_display = ('name', 'code', 'unit', 'quantity', 'category', 'active')
     search_fields = ('nombre', 'code')
-    list_filter = ('unity', 'category', 'active')
+    list_filter = ('unit', 'category', 'active')
     ordering = ('name',)
     form = ProductForm
 
 class VersionAdmin(admin.ModelAdmin):
     list_display = ('version', 'date')
 
-class UnityAdmin(admin.ModelAdmin):
+class UnitAdmin(admin.ModelAdmin):
     list_display = ('name', 'acronym')
     ordering = ('name', 'acronym')
     search_fields = ('name', 'acronym')
@@ -65,7 +65,7 @@ class ProductInStoreAdmin(admin.ModelAdmin):
     
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Version, VersionAdmin)
-admin.site.register(Unity, UnityAdmin)
+admin.site.register(Unit, UnitAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Store, StoreAdmin)
 admin.site.register(ProductInStore, ProductInStoreAdmin)

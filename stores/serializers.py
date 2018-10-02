@@ -5,52 +5,35 @@ sys.setdefaultencoding('utf-8')
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
-from stores.models import Product, Unity, Version, Category, Store, ProductInStore
-
-class UnitySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Unity
-        fields = ('name', 'acronym')
+from stores.models import Product, Unit, Version, Category, Store, ProductInStore
 
 class VersionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Version
-        fields = ('version', 'date')
+        fields = '__all__'
 
-
-'''class IngredienteSerializer(serializers.ModelSerializer):
-
-    unidad = UnidadSerializer(read_only=True)
-
+class UnitSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ingrediente
-        fields = ('nombre', 'nombre2', 'estado', 'cantidad', 'unidad')
+        model = Unit
+        fields = '__all__'
 
-
-class ImplementoSerializer(serializers.ModelSerializer):
-
+class ProductSerializer(serializers.ModelSerializer):
+    unit = UnitSerializer(read_only=True)
     class Meta:
-        model = Implemento
-        fields = ('nombre', 'descripcion')
+        model = Product
+        fields = '__all__'
 
-
-class PasoSerializer(serializers.ModelSerializer):
-
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Paso
-        fields = ('orden', 'paso')
+        model = Category
+        fields = '__all__'
 
-
-class PasoSerializer(serializers.ModelSerializer):
-
+class StoreSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Paso
-        fields = ('orden', 'paso')
+        model = Store
+        fields = '__all__'
 
-
-
-
+'''
 class RecetaSerializer(serializers.ModelSerializer):
 
     ingredientes = IngredienteSerializer(many=True, read_only=True)

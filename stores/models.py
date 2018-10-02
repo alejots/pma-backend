@@ -38,7 +38,7 @@ class Version(models.Model):
         return (str(self.version)+". "+str(self.date))
 
 
-class Unity(models.Model):
+class Unit(models.Model):
     name = models.CharField(max_length=200)
     acronym = models.CharField(max_length=45)
     class Meta:
@@ -60,7 +60,7 @@ class Product (models.Model):
     name = models.CharField(max_length=200, help_text='Name of product')
     code = models.CharField(max_length=45, help_text='Code of product')
     image = models.ImageField(blank=True, null=True, upload_to='products', help_text='386x249')
-    unity = models.ForeignKey(Unity, related_name='products', on_delete=models.CASCADE)
+    unit = models.ForeignKey(Unit, related_name='products', on_delete=models.CASCADE)
     quantity = models.CharField(max_length=5)
     category = models.ForeignKey(Category, related_name='products_category', blank=False, null=True, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)

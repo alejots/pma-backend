@@ -12,13 +12,11 @@ from django.views.static import serve
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-'''router.register(r'recetas', views.RecetaViewSet)
-router.register(r'ingredientes', views.IngredienteViewSet)
-router.register(r'implementos', views.ImplementoViewSet)
-router.register(r'versiones', views.VersionViewSet)
-router.register(r'me-gustas', views.MeGustaViewSet)
-router.register(r'compartidos', views.CompartidoViewSet)
-'''
+router.register(r'versions', views.VersionViewSet)
+router.register(r'units', views.UnitViewSet)
+router.register(r'products', views.ProductViewSet)
+router.register(r'categories', views.CategoryViewSet)
+router.register(r'stores', views.StoreViewSet)
 
 schema_view = get_schema_view(title='Pastebin API')
 
