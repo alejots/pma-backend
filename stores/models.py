@@ -37,7 +37,6 @@ class Version(models.Model):
     def __unicode__(self):
         return (str(self.version)+". "+str(self.date))
 
-
 class Unit(models.Model):
     name = models.CharField(max_length=200)
     acronym = models.CharField(max_length=45)
@@ -45,6 +44,7 @@ class Unit(models.Model):
         verbose_name_plural = "Units"
     def __unicode__(self):
         return self.name
+
 
 class Category(models.Model):
     name = models.CharField(max_length=200, help_text='Name of category')
@@ -59,10 +59,9 @@ class Category(models.Model):
 class Product (models.Model):
     name = models.CharField(max_length=200, help_text='Name of product')
     code = models.CharField(max_length=45, help_text='Code of product')
-    image = models.ImageField(blank=True, null=True, upload_to='products', help_text='386x249')
-    unit = models.ForeignKey(Unit, related_name='products', on_delete=models.CASCADE)
-    quantity = models.CharField(max_length=5)
-    category = models.ForeignKey(Category, related_name='products_category', blank=False, null=True, on_delete=models.CASCADE)
+    unit = models.CharField(max_length=200)
+    quantity = models.PositiveIntegerField(blank=False, null=False)
+    category = models.CharField(max_length=200, blank=False, null=False)
     active = models.BooleanField(default=True)
 
     def __unicode__(self):

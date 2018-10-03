@@ -17,6 +17,7 @@ router.register(r'units', views.UnitViewSet)
 router.register(r'products', views.ProductViewSet)
 router.register(r'categories', views.CategoryViewSet)
 router.register(r'stores', views.StoreViewSet)
+router.register(r'products-in-stores', views.StoreViewSet)
 
 schema_view = get_schema_view(title='Pastebin API')
 

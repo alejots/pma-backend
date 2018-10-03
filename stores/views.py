@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 
 from django.contrib.auth.models import User
 from stores.models import Product, Unit, Version, Category, Store, ProductInStore
-from stores.serializers import VersionSerializer, UnitSerializer, ProductSerializer, CategorySerializer, StoreSerializer# UserSerializer
+from stores.serializers import VersionSerializer, UnitSerializer, ProductSerializer, CategorySerializer, StoreSerializer, ProductInStoreSerializer# UserSerializer
 from stores.permissions import IsOwnerOrReadOnly
 
 
@@ -49,6 +49,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
+
+class ProductInStoreViewSet(viewsets.ModelViewSet):
+    queryset = ProductInStore.objects.all()
+    serializer_class = ProductInStoreSerializer
 
 
 @api_view(['GET'])
